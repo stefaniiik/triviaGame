@@ -1,91 +1,58 @@
 <!DOCTYPE html>
 
 <head>
+    <meta charset="utf-8">
     <title> Trivia Game </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-        crossorigin="anonymous">
+    <meta name="description" content="">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="resetstylesheet" type="text/css" href="assets/css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row-md-12">
+    <div id="splashscreen">
+        <div class="splashBox">
             <h1>Harry Potter Trivia Game</h1>
+            <p>You have 60 seconds to answer 3 questions.</p>
+            <br />
+            <p>Click Below to Start</p>
+            <button type="button" id="start-btn" class="butn btn-primary black-background white">You're a Wizard Harry</button>
         </div>
     </div>
-    <div class="container" style="background-color: #154360">
-        <div class="row-md-12">
-            <h3>Time Remaining:</h3>
-            <span id="timer"></span>
-        </div>
-        <div class="row">
-            <h5>Who is the half-blood prince?</h5>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio1">Harry Potter</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Ronald Weasley</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">Severus Snape</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio4">Neville Longbottom</label>
-            </div>
-        </div>
-        <div class="row">
-            <h5>Who is the Ravenclaw who loves Raddish earrings?</h5>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio1">Helena Ravenclaw</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Lune Lovegood</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">Fleur Delacour</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio4"> Cho Chang</label>
-            </div>
-        </div>
-        <div class="row">
-            <h5>What is Harry Potter's Patronus?</h5>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio1">Otter</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Phoenix</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">Doe</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio4">Stag</label>
-            </div>
-        </div>
-    </div>
-
+    <div class="mainContainer" style="background-color: #154360"></div>
+  <div id="answerScreen">
+      <div class="splashBox2">
+          <h2> Answers loading...</h2>
+          <br />
+          <p id="correctScreen">Correct Answers:</p>
+          <p id="wrongScreen">Better luck next time:</p>
+      </div>
+  </div>  
+  <div id="timesUp">
+      <div class="wrongBox">
+          <h2 class="up">Times up!</h2>
+          <hr />
+          <p>Here's how you did:</p>
+          <p id="correctTimesUp">Correct Answers:</p>
+          <p id="wrongTimesUp">Wrong Answers:</p>
+      </div>
+  </div>
+  <div class="container">
+      <header>Harry PotterTrivia!</header>
+      <div class="row timeRemain">Time Remaining:</div>
+      <div id="timeRemain">60</div>
+  </div>
+</div>
+  <div class="questions">
+      <button type="button" class="btn btn-primary black-background white" id"sub-but">Submit</button>
+  </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-    crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="assets/javascript/app.js"></script>
 
 </html>
