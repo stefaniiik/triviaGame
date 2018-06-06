@@ -3,7 +3,7 @@ var questions = [{
     ques: "Who is the half-blood prince?",
     ans: ["Harry Potter", "Ronald Weasley", "Severus Snape", "Neville Longbottom"],
     name: "halfBlood",
-    correct: "Severus Snap",
+    correct: "Severus Snape",
     divClass: ".halfblood"
 },
 {
@@ -20,6 +20,21 @@ var questions = [{
     correct: "Stag",
     divClass: ".patronus"
 },
+{
+    ques: "Where does Harry find Ginnyy?",
+    ans: ["Chamber of Secrets", "Slytherin Common Room", "Girls' Lavatory", "Quidditch Field"],
+    name: "ginny",
+    correct: "Chamber of Secrets",
+    divClass: ".ginny"
+},
+{
+    
+    ques: "Who killed Dumbledore?",
+    ans: ["Draco Malfoy", "Harry Potter", "Severus Snape", "Hagrid"],
+    name: "dumbledore",
+    correct: "Severus Snape",
+    divClass: ".dumbledore"
+}
 ]
 
 var labels = ["first", "second", "third", "forth"];
@@ -35,8 +50,8 @@ var startGame = $("#start-btn").on('click', function() {
 // function for displaying questions
 var questionDisplay = function() {
     $(".questions :not('#sub-but')").empty();
-    // loops through the 3 questions 
-    for (var j = 0; j < 3; j++) {
+    // loops through the 5 questions 
+    for (var j = 0; j < 5; j++) {
         $('.questions').prepend('<div class="' + questions[j].name + '"></div>');
         $(questions[j].divClass).append('<div class ="ques-title">' + questions[j].ques + '</div>');
         // loops through answers for each radio button
@@ -62,7 +77,7 @@ var countdown = function(seconds) {
             var unAnswered = 0;
 
             // loop through correctArray & radioName to match html elements & answers
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 5; i++) {
 
                 if ($('input:radio[name="' + questions[i].name + '"]:checked').val() === questions[i].correct) {
 
@@ -99,7 +114,7 @@ var gradeQuiz = $('#sub-but').on('click', function() {
     var unAnswered = 0;
 
     // loop through correctArray & radioName to match html elements & answers
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 5; i++) {
 
         if ($('input:radio[name="' + questions[i].name + '"]:checked').val() === questions[i].correct) {
 
