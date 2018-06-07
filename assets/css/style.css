@@ -3,6 +3,7 @@ body {
     color: white;
     font-family: 'Anton', sans-serif;
     letter-spacing: 2px;
+    margin-bottom: 50px;
 }
 h1 {
 font-family: 'Rock Salt', cursive;
@@ -10,6 +11,11 @@ text-align: center;
 margin-top: 50px;
 font-size: 62px;
 margin-bottom: 70px;
+}
+h2 {
+    font-family: 'Rock Salt', cursive;
+    color: mediumpurple;
+    text-decoration: bold;
 }
 h3 {
     text-align: center;

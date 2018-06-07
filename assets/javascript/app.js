@@ -35,9 +35,9 @@ var questions = [{
     correct: "Severus Snape",
     divClass: ".dumbledore"
 }
-]
+];
 
-var labels = ["first", "second", "third", "forth"];
+var labels = ["first",  "second", "third", "forth"];
 
 // click to start then display quesions
 var startGame = $("#start-btn").on('click', function() {
@@ -49,18 +49,26 @@ var startGame = $("#start-btn").on('click', function() {
 
 // function for displaying questions
 var questionDisplay = function() {
-    $(".questions :not('#sub-but')").empty();
+    $(".questions :not('#sub-but')").remove();
     // loops through the 5 questions 
     for (var j = 0; j < 5; j++) {
         $('.questions').prepend('<div class="' + questions[j].name + '"></div>');
         $(questions[j].divClass).append('<div class ="ques-title">' + questions[j].ques + '</div>');
-        // loops through answers for each radio button
+        // loops through answers for each button
         for (var i = 0; i <= 3; i++) {
             $(questions[j].divClass).append('<input type="radio"  name="' + questions[j].name + '" value="' + questions[j].ans[i] + '"/><label for="' + labels[i] + '">' + questions[j].ans[i] + '</label>');
         }
         $('.questions').prepend('<hr />');
-    }
-}
+    };
+
+// Submit button 
+    var button = document.createElement("button");
+    button.innerHTML = "Submit";
+    $(button).css({"background-color": "mediumpurple"});
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(button);
+};
+
 
 
 // function for countdown timer
@@ -68,7 +76,7 @@ var countdown = function(seconds) {
 
     var timer = setInterval(function() {
         seconds = seconds - 1;
-        $("#time-remain").html(seconds);
+        $("#timeRemain").html(seconds);
 
         if (seconds <= 0) {
             $('.container').fadeOut(500);
@@ -76,7 +84,7 @@ var countdown = function(seconds) {
             var wrongAnswers = 0;
             var unAnswered = 0;
 
-            // loop through correctArray & radioName to match html elements & answers
+// loop through correctArray & name to match html elements & answers
             for (var i = 0; i < 5; i++) {
 
                 if ($('input:radio[name="' + questions[i].name + '"]:checked').val() === questions[i].correct) {
@@ -113,7 +121,7 @@ var gradeQuiz = $('#sub-but').on('click', function() {
     var wrongAnswers = 0;
     var unAnswered = 0;
 
-    // loop through correctArray & radioName to match html elements & answers
+    // loop through correctArray & name to match html elements & answers
     for (var i = 0; i < 5; i++) {
 
         if ($('input:radio[name="' + questions[i].name + '"]:checked').val() === questions[i].correct) {
