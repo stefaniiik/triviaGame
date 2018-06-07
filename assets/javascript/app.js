@@ -21,7 +21,7 @@ var questions = [{
     divClass: ".patronus"
 },
 {
-    ques: "Where does Harry find Ginnyy?",
+    ques: "Where does Harry find Ginny?",
     ans: ["Chamber of Secrets", "Slytherin Common Room", "Girls' Lavatory", "Quidditch Field"],
     name: "ginny",
     correct: "Chamber of Secrets",
@@ -39,8 +39,9 @@ var questions = [{
 
 var labels = ["first",  "second", "third", "forth"];
 
-// click to start then display quesions
+// click to start then display questions
 var startGame = $("#start-btn").on('click', function() {
+    console.log("start game")
     $(this).parent().hide();
     $('.container').show();
     countdown(60);
@@ -49,9 +50,10 @@ var startGame = $("#start-btn").on('click', function() {
 
 // function for displaying questions
 var questionDisplay = function() {
-    $(".questions :not('#sub-but')").remove();
+    // $(".questions :not('#sub-but')").remove();
     // loops through the 5 questions 
-    for (var j = 0; j < 5; j++) {
+    for (var j = 0; j < questions.length; j++) {
+        console.log(j)
         $('.questions').prepend('<div class="' + questions[j].name + '"></div>');
         $(questions[j].divClass).append('<div class ="ques-title">' + questions[j].ques + '</div>');
         // loops through answers for each button
@@ -61,7 +63,7 @@ var questionDisplay = function() {
         $('.questions').prepend('<hr />');
     };
 
-// Submit button 
+// Submit button - need an on click but it's below.
     var button = document.createElement("button");
     button.innerHTML = "Submit";
     $(button).css({"background-color": "mediumpurple"});

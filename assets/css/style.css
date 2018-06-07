@@ -125,6 +125,7 @@ label {
 
 header {
     font-size: 60px;
-    color: black;
+    color: mediumpurple;
+    font-family: 'Rock Salt', cursive;
     margin-top: 2%;
 }
