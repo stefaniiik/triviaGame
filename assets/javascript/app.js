@@ -28,7 +28,7 @@ var questions = [{
     divClass: ".ginny"
 },
 {
-    
+
     ques: "Who killed Dumbledore?",
     ans: ["Draco Malfoy", "Harry Potter", "Severus Snape", "Hagrid"],
     name: "dumbledore",
@@ -37,10 +37,11 @@ var questions = [{
 }
 ];
 
-var labels = ["first",  "second", "third", "forth"];
+var labels = ["first", "second", "third", "forth"];
+
 
 // click to start then display questions
-var startGame = $("#start-btn").on('click', function() {
+var startGame = $("#start-btn").on('click', function () {
     console.log("start game")
     $(this).parent().hide();
     $('.container').show();
@@ -49,34 +50,72 @@ var startGame = $("#start-btn").on('click', function() {
 });
 
 // function for displaying questions
-var questionDisplay = function() {
+var questionDisplay = function () {
     // $(".questions :not('#sub-but')").remove();
     // loops through the 5 questions 
-    for (var j = 0; j < questions.length; j++) {
-        console.log(j)
-        $('.questions').prepend('<div class="' + questions[j].name + '"></div>');
-        $(questions[j].divClass).append('<div class ="ques-title">' + questions[j].ques + '</div>');
-        // loops through answers for each button
-        for (var i = 0; i <= 3; i++) {
-            $(questions[j].divClass).append('<input type="radio"  name="' + questions[j].name + '" value="' + questions[j].ans[i] + '"/><label for="' + labels[i] + '">' + questions[j].ans[i] + '</label>');
-        }
-        $('.questions').prepend('<hr />');
-    };
 
-// Submit button - need an on click but it's below.
+    // For loop that was there before:
+    // for (var j = 0; j < questions.length; j++) {
+    //     console.log(questions[j])
+    //     $('.questions').append('<div class="' + questions[j].name + '"></div>');
+    //     $(questions[j].divClass).append('<div class ="ques-title">' + questions[j].ques + '</div>');
+    //     // loops through answers for each button
+    //     for (var i = 0; i <= 3; i++) {
+    //         $(questions[j].divClass).append('<input type="radio"  name="' + questions[j].name + '" value="' + questions[j].ans[i] + '"/><label for="' + labels[i] + '">' + questions[j].ans[i] + '</label>');
+    //     }
+    //     $('.questions').append('<hr />');
+    // };
+
+    // start
+    for (var i = 0; i < questions.length; i++) {
+        var questionDiv = $("<div>");
+
+        questionDiv.text(questions[i].ques);
+        $(".questions").append(questionDiv);
+
+
+        var answerFormDiv = $("<form>");
+
+        for (var y = 0; y < questions[i].ans.length; y++) {
+            var answerRadioDiv = $("<input>" + questions[i].ans[y] + "<br>");
+
+            // answerRadioDiv.text(questions[i].ans[y])
+
+            answerRadioDiv.attr({
+                "type": "radio",
+                "value": questions[i].ans[y],
+                "name": questions[i].name
+
+            });
+            //    answerFormDiv.append("<br>");
+            answerFormDiv.append(answerRadioDiv);
+
+
+        }
+
+        questionDiv.append(answerFormDiv);
+        questionDiv.append("<br>");
+    }
+
+    // end
+
+    // Submit button - need an on click but it's below.
     var button = document.createElement("button");
     button.innerHTML = "Submit";
-    $(button).css({"background-color": "mediumpurple"});
+    $(button).css({ "background-color": "mediumpurple" });
+    $(button).attr("id", "submitAnswers");
     var body = document.getElementsByTagName("body")[0];
+
+    console.log(body);
     body.appendChild(button);
 };
 
 
 
 // function for countdown timer
-var countdown = function(seconds) {
+var countdown = function (seconds) {
 
-    var timer = setInterval(function() {
+    var timer = setInterval(function () {
         seconds = seconds - 1;
         $("#timeRemain").html(seconds);
 
@@ -86,8 +125,10 @@ var countdown = function(seconds) {
             var wrongAnswers = 0;
             var unAnswered = 0;
 
-// loop through correctArray & name to match html elements & answers
+            // loop through correctArray & name to match html elements & answers
             for (var i = 0; i < 5; i++) {
+
+
 
                 if ($('input:radio[name="' + questions[i].name + '"]:checked').val() === questions[i].correct) {
 
@@ -110,14 +151,14 @@ var countdown = function(seconds) {
     }, 1000);
 
     // click event for submit button to stop timer
-    $('#sub-but').on('click', function() {
+    $('#submitAnswers').on('click', function () {
         clearInterval(timer);
     })
 }; // end countdown
 
 
 // function to grade quiz once submit button is clicked
-var gradeQuiz = $('#sub-but').on('click', function() {
+var gradeQuiz = function () {
 
     var correctAnswers = 0;
     var wrongAnswers = 0;
@@ -147,4 +188,9 @@ var gradeQuiz = $('#sub-but').on('click', function() {
     // display wrongAnswers
     $('#wrongScreen').append(wrongAnswers);
 
-}); 
+};
+
+$(document).on('click', "#submitAnswers", function () {
+
+    gradeQuiz();
+})
